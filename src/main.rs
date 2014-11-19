@@ -12,10 +12,10 @@ fn main() {
                 optflag("d", "decode", "decode"),
                 optflag("e", "encode", "encode")];
 
-    let m = getopts(os::args().tail(), opts).ok().expect("Fail");
+    let m = getopts(os::args().tail(), &opts).ok().expect("Fail");
 
     if m.opt_present("h") {
-        println!("{}", usage("Base64 encoding and decoding", opts));
+        println!("{}", usage("Base64 encoding and decoding", &opts));
         return;
     }
 
