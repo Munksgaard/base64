@@ -7,7 +7,7 @@ pub fn encode(v: &[u8]) -> Vec<u8> {
 
     let mut split: Vec<u8> = Vec::new();
 
-    for i in range(0, len * 4 / 3 + ((len % 3 != 0) as uint)) {
+    for i in 0..(len * 4 / 3 + ((len % 3 != 0) as usize)) {
         let index = i / 4 * 3;
         match i % 4 {
             0 => split.push(v[index] >> 2),
@@ -29,12 +29,13 @@ pub fn encode(v: &[u8]) -> Vec<u8> {
             }
     }
 
-    let mut encoded = split.map_in_place(|x| BASE64_CHARS[x as uint]);
+    let mut encoded: Vec<u8> = split.iter().map(|x| BASE64_CHARS[*x as usize]).collect();
 
     let elen = encoded.len();
 
     if elen % 4 != 0 {
-        encoded.grow(4 - elen % 4, b'=');
+        let len = encoded.len();
+        encoded.resize(len + 4 - elen % 4, b'=');
     }
 
     encoded
@@ -48,7 +49,7 @@ pub fn decode(v: &[u8]) -> Vec<u8> {
 
     let mut res: Vec<u8> = Vec::new();
 
-    for i in range(0, trans.len()) {
+    for i in 0..trans.len() {
         match i % 4 {
             0 => res.push(trans[i] << 2),
             1 => { *res.last_mut().unwrap() = *res.last().unwrap() + (trans[i] >> 4);

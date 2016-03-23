@@ -3,3 +3,6 @@
 name = "base64"
 version = "0.0.1"
 authors = ["Philip Munksgaard <pmunksgaard@gmail.com>"]
+
+[dependencies]
+getopts = "0.2.14"
