@@ -6,3 +6,4 @@ authors = ["Philip Munksgaard <pmunksgaard@gmail.com>"]
 
 [dependencies]
 getopts = "0.2.14"
+rand = "0.3.14"

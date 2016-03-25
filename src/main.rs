@@ -2,11 +2,13 @@
 
 extern crate getopts;
 extern crate base64;
+extern crate rand;
 
 use std::path::Path;
 use std::fs::File;
 use std::io::stdin;
 use std::io::Read;
+use std::io::Write;
 use getopts::Options;
 use base64::{encode, decode};
 
@@ -41,7 +43,7 @@ fn main() {
 
     if m.opt_present("d") {
         let result = decode(input.as_slice());
-        print!("{}", String::from_utf8(result).unwrap());
+        std::io::stdout().write(&result);
     } else {
         let result = encode(input.as_slice());
         print!("{}", String::from_utf8(result).unwrap());
