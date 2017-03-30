@@ -28,7 +28,7 @@ fn main() {
     }
 
     let input: Vec<u8> = match m.free.as_slice() {
-        [ref s, ..] => {
+        &[ref s, ..] => {
             let file = File::open(&Path::new(s));
             let mut buf = Vec::new();
             let _ = file.unwrap().read_to_end(&mut buf).unwrap();
